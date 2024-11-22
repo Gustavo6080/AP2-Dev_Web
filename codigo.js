@@ -1,6 +1,5 @@
 const app = {
     baseUrl: "https://botafogo-atletas.mange.li/2024-1/",
-
     init: () => {
         document.addEventListener('DOMContentLoaded', () => {
             app.setupEventListeners();
@@ -47,17 +46,25 @@ const app = {
         initAthleteSelection: () => {
             const elencoSelect = document.getElementById("elenco-select");
             if (elencoSelect) {
+                let timeout;
                 elencoSelect.onchange = () => {
-                    const value = elencoSelect.value;
-                    app.athletes.fetchAthletes(value);
+                    clearTimeout(timeout);
+                    timeout = setTimeout(() => {
+                        const value = elencoSelect.value;
+                        app.athletes.fetchAthletes(value);
+                    }, 300);
                 };
             }
 
             const searchInput = document.getElementById("search-input");
             if (searchInput) {
+                let timeout;
                 searchInput.oninput = () => {
-                    const searchValue = searchInput.value.toLowerCase();
-                    app.athletes.filterAthletes(searchValue);
+                    clearTimeout(timeout);
+                    timeout = setTimeout(() => {
+                        const searchValue = searchInput.value.toLowerCase();
+                        app.athletes.filterAthletes(searchValue);
+                    }, 300);
                 };
             }
         },
@@ -75,6 +82,7 @@ const app = {
         },
 
         filterAthletes: (searchTerm) => {
+            if (!app.athletes.allAthletes) return;
             const filteredAthletes = app.athletes.allAthletes.filter((athlete) => {
                 return athlete.nome.toLowerCase().includes(searchTerm);
             });
@@ -85,21 +93,24 @@ const app = {
             const athleteList = document.getElementById("athlete-list");
             athleteList.innerHTML = "";
 
+            const fragment = document.createDocumentFragment();
             athletes.forEach((athlete) => {
                 const athleteCard = document.createElement("div");
                 athleteCard.className = "athlete-card";
 
                 athleteCard.innerHTML = `
                     <h3>${athlete.nome}</h3>
-                    <img src="${athlete.imagem}" alt="Imagem do atleta ${athlete.nome}" />
+                    <img src="${athlete.imagem}" loading="lazy" alt="Imagem do atleta ${athlete.nome}" />
                 `;
 
                 athleteCard.addEventListener("click", () => {
                     window.location.href = `detalhes.html?id=${athlete.id}`;
                 });
 
-                athleteList.appendChild(athleteCard);
+                fragment.appendChild(athleteCard);
             });
+
+            athleteList.appendChild(fragment);
         }
     }
 };
