@@ -70,7 +70,7 @@ const mountAthletePage = (dados) => {
     const botaoVoltar = document.createElement('button');
     botaoVoltar.innerText = 'Voltar';
     botaoVoltar.className = 'botao-voltar';
-    botaoVoltar.onclick = () => window.location.href = 'index.html'; // Redireciona para a página inicial
+    botaoVoltar.onclick = () => window.location.href = 'atletas.html'; // Redireciona para a página inicial
     container.appendChild(botaoVoltar);
 }
 

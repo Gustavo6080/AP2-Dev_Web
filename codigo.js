@@ -39,7 +39,7 @@ const app = {
         },
 
         redirectToDashboard: () => {
-            window.location.href = "index.html";
+            window.location.href = "atletas.html";
         }
     },
 
