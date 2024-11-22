@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <script src="codigo.js"></script>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="shortcut icon" href="imagem/escudo.png" type="image/x-icon">
+</head>
+<body>
+    <main>
+        <div id="filter-options">
+            <!-- Dropdown para seleção -->
+            <select id="elenco-select">
+                <option value="all">Todos</option>
+                <option value="masculino">Masculino</option>
+                <option value="feminino">Feminino</option>
+            </select>
+
+            <input type="text" id="search-input" placeholder="Buscar atleta...">
+        </div>
+        
+    
+        <!-- Lista de atletas -->
+        <div id="athlete-list"></div>
+    </main>    
+
+    <!-- Botão de Logout -->
+    <button id="logout-button">Logout</button>
+
+    <script>
+        document.getElementById("logout-button").onclick = function () {
+            // Remover qualquer informação de login na sessão
+            sessionStorage.removeItem('login');
+            
+            // Redirecionar para a página de login
+            window.location.href = "login.html";
+        };
+    </script>
+
+</body>
+</html>
