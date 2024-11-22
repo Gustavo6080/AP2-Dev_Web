@@ -53,7 +53,6 @@ const app = {
                 };
             }
 
-            // Adicionando o evento de pesquisa
             const searchInput = document.getElementById("search-input");
             if (searchInput) {
                 searchInput.oninput = () => {
@@ -69,7 +68,7 @@ const app = {
                 const response = await fetch(url);
                 const data = await response.json();
                 app.athletes.displayAthletes(data);
-                app.athletes.allAthletes = data; // Armazenando todos os atletas para realizar a filtragem
+                app.athletes.allAthletes = data;
             } catch (error) {
                 console.error("Erro ao buscar atletas:", error);
             }
@@ -84,28 +83,25 @@ const app = {
 
         displayAthletes: (athletes) => {
             const athleteList = document.getElementById("athlete-list");
-            athleteList.innerHTML = ""; // Limpa a lista antes de adicionar novos atletas
-        
+            athleteList.innerHTML = "";
+
             athletes.forEach((athlete) => {
                 const athleteCard = document.createElement("div");
                 athleteCard.className = "athlete-card";
-        
+
                 athleteCard.innerHTML = `
                     <h3>${athlete.nome}</h3>
                     <img src="${athlete.imagem}" alt="Imagem do atleta ${athlete.nome}" />
                 `;
-        
-                // Adiciona o evento de clique para redirecionar para a página de detalhes
+
                 athleteCard.addEventListener("click", () => {
-                    // Redireciona para a página de detalhes com o ID do atleta na URL
                     window.location.href = `detalhes.html?id=${athlete.id}`;
                 });
-        
+
                 athleteList.appendChild(athleteCard);
             });
         }
     }
 };
 
-// Inicializa o aplicativo
 app.init();
